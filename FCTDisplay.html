@@ -1,0 +1,323 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/a316f55828.js" crossorigin="anonymous"></script>
+    <style>
+      /* Full-screen overlay modal styles */
+      .contact-form {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1055;
+        background-color: #f2f2f7;
+        display: flex;
+        flex-direction: column;
+        max-width: 414px;
+        margin: 0 auto;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      }
+
+      /* Header Panel */
+      .header-panel {
+        background: #f2f2f7;
+        border-bottom: 0.5px solid #d1d1d6;
+        padding: 16px 20px;
+        text-align: center;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .btn-done {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #007AFF;
+        font-size: 16px;
+        font-weight: 400;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+      }
+
+      .btn-done:hover {
+        background-color: rgba(0, 122, 255, 0.1);
+      }
+
+      .title-label {
+        font-size: 18px;
+        font-weight: 600;
+        color: #000;
+        margin: 0;
+      }
+
+      /* Profile Panel */
+      .profile-panel {
+        padding: 24px 20px;
+        text-align: center;
+        background: #f2f2f7;
+        flex-shrink: 0;
+      }
+
+      .initials-div {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        background: linear-gradient(135deg, #007AFF, #5AC8FA);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 48px;
+        font-weight: 300;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      }
+
+      .contact-name {
+        font-size: 28px;
+        font-weight: 300;
+        color: #000;
+        margin: 0;
+        text-align: center;
+      }
+
+     /* Details Panel */
+      .details-panel {
+        background: white;
+        padding: 0;
+        flex: 1;
+        overflow-y: auto;
+        border-top: 0.5px solid #d1d1d6;
+      }
+
+      /* Group Box Styles */
+      .group-phone, .group-address {
+        border-bottom: 0.5px solid #d1d1d6;
+        background: white;
+        margin-bottom: 0;
+      }
+
+      .group-phone:last-child, .group-address:last-child {
+        border-bottom: none;
+      }
+
+      /* Phone and Address Items */
+        .phone-item, .address-item {
+          display: flex;
+          align-items: center;
+          padding: 12px 20px;
+          border-bottom: 0.5px solid #d1d1d6;
+          background: white;
+          text-decoration: none;
+          color: inherit;
+          transition: background 0.2s;
+          border: none;
+          width: 100%;
+          text-align: left;
+        }
+
+      .phone-item:last-child, .address-item:last-child {
+        border-bottom: none;
+      }
+
+      .phone-item:hover, .address-item:hover {
+        background: #f8f9fa;
+      }
+
+      .item-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .item-label {
+        font-size: 14px;
+        color: #8E8E93;
+        margin: 0 0 2px 0;
+        font-weight: 400;
+        display: block;
+      }
+
+      .item-value {
+        font-size: 16px;
+        color: #007AFF;
+        margin: 0;
+        font-weight: 400;
+        word-break: break-word;
+        line-height: 1.4;
+        display: block;
+      }
+
+      .address-item .item-value {
+        color: #000;
+      }
+
+      .item-chevron {
+        margin-left: 12px;
+        color: #C7C7CC;
+        font-size: 14px;
+      }
+
+    /* Phone Action Buttons */
+      .phone-actions {
+        display: flex;
+        gap: 8px;
+        margin-left: 12px;
+      }
+
+      .btn-phone-message, .btn-phone-call {
+        background: #007AFF;
+        border: none;
+        border-radius: 20px;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .btn-phone-message:hover, .btn-phone-call:hover {
+        background: #0056CC;
+      }
+
+
+       /* Mobile responsive adjustments */
+      @media (max-width: 576px) {
+        .actions-panel {
+          gap: 16px;
+          padding: 20px 0;
+        }
+
+        .action-icon {
+          width: 48px;
+          height: 48px;
+          border-radius: 24px;
+          font-size: 20px;
+        }
+
+        .initials-div {
+          width: 100px;
+          height: 100px;
+          border-radius: 50px;
+          font-size: 40px;
+        }
+
+        .contact-name {
+          font-size: 24px;
+        }
+      }
+
+      /* Desktop styles - centered modal */
+      @media (min-width: 768px) {
+        .contact-form {
+          position: relative;
+          top: auto;
+          left: auto;
+          right: auto;
+          bottom: auto;
+          width: 400px;
+          height: auto;
+          max-height: 90vh;
+          margin: 1.75rem auto;
+          border-radius: 16px;
+          box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .header-panel {
+          border-radius: 16px 16px 0 0;
+        }
+      }
+
+      /* HTML Container Styles */
+      .html-container {
+        padding: 0;
+        margin: 0;
+      }
+
+      .ios-initials {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        background: linear-gradient(135deg, #007AFF, #5AC8FA);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 16px;
+        font-size: 48px;
+        font-weight: 300;
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      }
+    </style>
+  </head>
+  <body>
+
+<div class="contact-form" id="contactForm">
+    <!-- Header Panel -->
+    <div class="header-panel" id="pnlHeader">
+        <button type="button" id="btnDone" class="btn-done" >Done</button>
+        <h2 class="title-label" id="lblTitle">Contact</h2>
+    </div>
+
+    <!-- Profile Panel -->
+    <div class="profile-panel" id="pnlProfile">
+        <div class="initials-div" >
+            <div class="ios-initials" id="divInitials">?</div>
+        </div>
+        <h1 class="contact-name" id="lblContactName">Contact Name</h1>
+    </div>
+
+    <!-- Details Panel -->
+    <div class="details-panel" id="pnlDetails">
+        <!-- Phone Group -->
+        <div class="group-phone" id="grpPhone">
+            <div class="phone-item" id="phone1Item">
+                <div class="item-content">
+                    <span class="item-label" id="lblPhone1">mobile</span>
+                    <span class="item-value" id="lblPhone1Value"></span>
+                </div>
+                <div class="phone-actions">
+                    <button class="btn-phone-message" id="btnMessage1" type="button" title="Message"><i class="fa-solid fa-message"></i></button>
+                    <button class="btn-phone-call" id="btnCall1" type="button" title="Call"><i class="fa-solid fa-phone"></i></button>
+                </div>
+            </div>
+            <div class="phone-item" id="phone2Item">
+                <div class="item-content">
+                    <span class="item-label" id="lblPhone2">home</span>
+                    <span class="item-value" id="lblPhone2Value"></span>
+                </div>
+                <div class="phone-actions">
+                    <button class="btn-phone-message" id="btnMessage2" type="button" title="Message"><i class="fa-solid fa-message"></i></button>
+                    <button class="btn-phone-call" id="btnCall2" type="button" title="Call"><i class="fa-solid fa-phone"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Address Group -->
+        <div class="group-address" id="grpAddress">
+            <div class="address-item">
+                <div class="item-content">
+                    <span class="item-label">Address</span>
+                    <span class="item-value" id="lblAddress"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+  </body>
+</html>
