@@ -1,0 +1,40 @@
+{
+   "short_name":"Finale Contacts",
+   "name":"Finale Contacts",
+   "description":"Finale Contacts Application",
+   "start_url":"index.html",
+   "display":"fullscreen",
+   "theme_color":"#FFFFFF",
+   "background_color":"#FFFFFF",
+   "related_applications": [{
+     "platform": "webapp",
+     "url": "index.html/manifest.json"
+    }],
+   "icons":
+   [
+    {
+      "src": "finale-icon-64.png",
+      "type": "image/png",
+      "sizes": "64x64",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "finale-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "finale-icon-256.png",
+      "type": "image/png",
+      "sizes": "256x256",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "finale-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+   ]
+}
